@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import "react-datepicker/dist/react-datepicker.css";
 
 // const URL = "http://127.0.0.1:5000/holiday";
-const URL = "http://lraulin.pythonanywhere.com/holiday";
+const URL = "https://lraulin.pythonanywhere.com/holiday";
 
 async function postData(url = "", data = {}) {
   // Default options are marked with *
