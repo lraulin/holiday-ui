@@ -62,10 +62,12 @@ function App() {
         <li>Export Timecards from Booker.</li>
         <li>Open downloaded file with Notepad; select all and copy.</li>
         <li>Paste into textbox above and click button.</li>
-        <li>Double-click output text; copy & paste into empty Notepad file.</li>
         <li>
-          File > Save as... Click on "Save as type" dropdown, select "All files
-          (*.*)"
+          Double-click output text; copy {"&"} paste into empty Notepad file.
+        </li>
+        <li>
+          File {">"} Save as... Click on "Save as type" dropdown, select "All
+          files (*.*)"
         </li>
         <li>Enter filename (anything you want).csv</li>
         <li>
@@ -73,8 +75,8 @@ function App() {
           spreadsheet app)!
         </li>
         <li>
-          (If double-clicking on the file doesn't work, try Right Click > Open
-          With... and selecting a spreadsheet program.)
+          (If double-clicking on the file doesn't work, try Right Click {">"}{" "}
+          Open With... and selecting a spreadsheet program.)
         </li>
       </ul>
       <h3>Output</h3>
