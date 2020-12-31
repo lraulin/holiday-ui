@@ -57,6 +57,17 @@ function App() {
           Submit
         </Button>
       </Form>
+      <h3>Instructions (If using Windows)</h3>
+      <p>Double-click, copy, paste into Notepad.</p>
+      <p>
+        File > Save as... Click on "Save as type" dropdown, select "All files
+        (*.*)"
+      </p>
+      <p>Enter filename (anything you want).csv </p>
+      <p>
+        Now you can open the file with MS Excel (or LibreOffice Calc or other
+        spreadsheet app)!
+      </p>
       <h3>Output</h3>
       <p>{output}</p>
     </div>
