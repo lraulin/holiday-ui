@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/holiday-ui/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/holiday-ui/static/js/main.7693fad8.chunk.js",
-    "main.js.map": "/holiday-ui/static/js/main.7693fad8.chunk.js.map",
+    "main.js": "/holiday-ui/static/js/main.eb5ec980.chunk.js",
+    "main.js.map": "/holiday-ui/static/js/main.eb5ec980.chunk.js.map",
     "runtime-main.js": "/holiday-ui/static/js/runtime-main.db5032fb.js",
     "runtime-main.js.map": "/holiday-ui/static/js/runtime-main.db5032fb.js.map",
     "static/css/2.046848f9.chunk.css": "/holiday-ui/static/css/2.046848f9.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.046848f9.chunk.css",
     "static/js/2.3168019e.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.7693fad8.chunk.js"
+    "static/js/main.eb5ec980.chunk.js"
   ]
 }
