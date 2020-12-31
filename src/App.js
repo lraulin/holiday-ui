@@ -61,7 +61,8 @@ function App() {
       <ul>
         <li>Export Timecards from Booker.</li>
         <li>Open downloaded file with Notepad; select all and copy.</li>
-        <li>Double-click, copy, paste into Notepad.</li>
+        <li>Paste into textbox above and click button.</li>
+        <li>Double-click output text; copy & paste into empty Notepad file.</li>
         <li>
           File > Save as... Click on "Save as type" dropdown, select "All files
           (*.*)"
@@ -70,6 +71,10 @@ function App() {
         <li>
           Now you can open the file with MS Excel (or LibreOffice Calc or other
           spreadsheet app)!
+        </li>
+        <li>
+          (If double-clicking on the file doesn't work, try Right Click > Open
+          With... and selecting a spreadsheet program.)
         </li>
       </ul>
       <h3>Output</h3>
