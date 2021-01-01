@@ -46,7 +46,9 @@ function App() {
       <Form>
         <Form.Group controlId="exampleForm.ControlTextarea1">
           {/* <DatePicker selected={date} onChange={(date) => setDate(date)} /> */}
-          <Form.Label>Paste booker export here</Form.Label>
+          <Form.Label>
+            <em>Paste Booker export here:</em>
+          </Form.Label>
           <Form.Control
             as="textarea"
             rows={3}
@@ -63,6 +65,9 @@ function App() {
         <li>Export Timecards from Booker.</li>
         <li>Open downloaded file with Notepad; select all and copy.</li>
         <li>Paste into textbox above and click button.</li>
+      </ul>
+      <h4>Optional (If you want to view it in Excel)</h4>
+      <ul>
         <li>
           Scroll down to "Raw Output (CSV Text)" at bottom. Double-click output
           text; copy {"&"} paste into empty Notepad file.
