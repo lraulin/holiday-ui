@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 // import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -63,7 +64,8 @@ function App() {
         <li>Open downloaded file with Notepad; select all and copy.</li>
         <li>Paste into textbox above and click button.</li>
         <li>
-          Double-click output text; copy {"&"} paste into empty Notepad file.
+          Scroll down to "Raw Output (CSV Text)" at bottom. Double-click output
+          text; copy {"&"} paste into empty Notepad file.
         </li>
         <li>
           File {">"} Save as... Click on "Save as type" dropdown, select "All
@@ -79,7 +81,32 @@ function App() {
           Open With... and selecting a spreadsheet program.)
         </li>
       </ul>
-      <h3>Output</h3>
+      <h3>Table</h3>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            {output
+              .split("\n")[0]
+              .split(",")
+              .map((header) => (
+                <th>{header}</th>
+              ))}
+          </tr>
+        </thead>
+        <tbody>
+          {output
+            .split("\n")
+            .slice(1)
+            .map((line) => (
+              <tr>
+                {line.split(",").map((cell) => (
+                  <td>{cell}</td>
+                ))}
+              </tr>
+            ))}
+        </tbody>
+      </Table>
+      <h3>Raw Output (CSV text)</h3>
       <p>{output}</p>
     </div>
   );
