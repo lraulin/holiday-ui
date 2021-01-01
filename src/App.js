@@ -69,21 +69,21 @@ function App() {
       <h4>Optional (If you want to view it in Excel)</h4>
       <ul>
         <li>
-          Scroll down to "Raw Output (CSV Text)" at bottom. Double-click output
-          text; copy {"&"} paste into empty Notepad file.
+          Right click {">"} Inspect or Ctrl+Shift+I (if in Chrome) to open
+          DevTools.
         </li>
         <li>
-          File {">"} Save as... Click on "Save as type" dropdown, select "All
-          files (*.*)"
-        </li>
-        <li>Enter filename (anything you want).csv</li>
-        <li>
-          Now you can open the file with MS Excel (or LibreOffice Calc or other
-          spreadsheet app)!
+          Click on "Console" tab and scroll to bottom to find text after the
+          line that says "POSTING...".
         </li>
         <li>
-          (If double-clicking on the file doesn't work, try Right Click {">"}{" "}
-          Open With... and selecting a spreadsheet program.)
+          Copy all that text. You might have to click "show more" on the bottom
+          right to see it all. You should be able to click on "Copy" on the
+          bottom right; selecting the text should work fine too.{" "}
+        </li>
+        <li>
+          Paste into Notepad and save as *.csv file. Now you should be able to
+          open it in Excel!
         </li>
       </ul>
       <h3>Table</h3>
