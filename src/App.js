@@ -111,8 +111,6 @@ function App() {
             ))}
         </tbody>
       </Table>
-      <h3>Raw Output (CSV text)</h3>
-      <p>{output}</p>
     </div>
   );
 }
