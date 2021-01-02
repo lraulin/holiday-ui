@@ -105,15 +105,51 @@ function App() {
             .slice(1)
             .map((line) => (
               <tr>
-                {line.split(",").map((cell) => (
-                  <td>
-                    {cell}
-                    {"  "}
-                    <div className="float-right">
-                      <CopyButton text={cell} />
-                    </div>
-                  </td>
-                ))}
+                {(() => {
+                  const [
+                    num,
+                    created,
+                    name,
+                    start,
+                    end,
+                    hrs,
+                    ot,
+                    rate,
+                    hol,
+                    pay,
+                  ] = line.split(",");
+                  return (
+                    <>
+                      <td>{num}</td>
+                      <td>{created}</td>
+                      <td>
+                        {name}
+                        <div className="float-right">
+                          <CopyButton text={name} />
+                        </div>
+                      </td>
+                      <td>{start}</td>
+                      <td>{end}</td>
+                      <td>{hrs}</td>
+                      <td>{ot}</td>
+                      <td>${rate}</td>
+                      <td>
+                        {hol}
+                        <div className="float-right">
+                          <CopyButton text={hol + " HOL"} />
+                        </div>
+                      </td>
+                      <td>
+                        ${pay}
+                        <div className="float-right">
+                          <CopyButton
+                            text={Number.parseFloat(pay).toFixed(2)}
+                          />
+                        </div>
+                      </td>
+                    </>
+                  );
+                })()}
               </tr>
             ))}
         </tbody>
