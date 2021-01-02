@@ -84,7 +84,7 @@ const App = () => {
         <Form.Group>
           <Form.File
             id="fileChooser"
-            label="Select exported Booker txt file."
+            label="Choose a file created by clicking 'Export CSV' in Booker Timecards with 'Type: HOURLY' and 'Status: preapproved' filters set."
             multiple={false}
             accept=".csv,.txt,text/csv,text/plain"
             onChange={(event) => uploadFile(event)}
