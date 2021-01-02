@@ -58,6 +58,17 @@ const postData = async (url = "", data = {}) => {
   return response.json(); // parses JSON response into native JavaScript objects
 };
 
+const downloadToFile = (content, filename, contentType) => {
+  const a = document.createElement("a");
+  const file = new Blob([content], { type: contentType });
+
+  a.href = URL.createObjectURL(file);
+  a.download = filename;
+  a.click();
+
+  URL.revokeObjectURL(a.href);
+};
+
 function App() {
   // const [date, setDate] = useState(new Date(2021, 1, 1));
   const date = "2021-01-01";
@@ -79,6 +90,12 @@ function App() {
     const data = await postData(URL, { date, csv });
     setOutput(data);
     // console.log(data);
+  };
+
+  const handleClickDownload = () => {
+    const filename =
+      "Holiday Pay Adjustments" + new Date().toISOString() + ".csv";
+    downloadToFile(output, filename, "text/csv");
   };
 
   return (
@@ -107,6 +124,9 @@ function App() {
         </Button>
       </Form>
       {csv ? null : <Instructions />}
+      {/* <Button variant="info" onClick={handleClickDownload}>
+        Download
+      </Button> */}
       <h3>Table</h3>
       <Table striped bordered hover>
         <thead>
