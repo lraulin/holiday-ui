@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
@@ -59,6 +59,7 @@ const App = () => {
       console.log("POSTING...");
       const data = await postData(API_URL, { date, csv: reader.result });
       setOutput(data);
+      localStorage.setItem("output", data);
       console.log(data);
     };
 
@@ -66,6 +67,16 @@ const App = () => {
       console.log(reader.error);
     };
   };
+
+  const clearData = () => {
+    setOutput("");
+    localStorage.removeItem("output");
+  };
+
+  useEffect(() => {
+    const data = localStorage.getItem("output");
+    if (data) setOutput(data);
+  }, []);
 
   return (
     <div className="App">
@@ -82,10 +93,14 @@ const App = () => {
       </Form>
       {output ? (
         <div id="outputDisplay">
-          <h3>Table</h3>
-          <Button variant="info" onClick={handleClickDownload}>
-            Download
-          </Button>
+          <div className="float-right">
+            <Button variant="danger" onClick={clearData}>
+              Reset
+            </Button>
+            <Button variant="info" onClick={handleClickDownload}>
+              Download
+            </Button>
+          </div>
           <Table striped bordered hover>
             <thead>
               <tr>
