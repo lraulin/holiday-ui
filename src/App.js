@@ -90,15 +90,15 @@ const App = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <td>Created At</td>
-                <td>Worker</td>
-                <td>Start Time</td>
-                <td>End Time</td>
-                <td>Total Hours</td>
-                <td>Overtime</td>
-                <td>Pay Rate</td>
-                <td>Memo</td>
-                <td>Adjustment</td>
+                <th>Created At</th>
+                <th>Worker</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Total Hours</th>
+                <th>Overtime</th>
+                <th>Pay Rate</th>
+                <th>Memo</th>
+                <th>Adjustment</th>
               </tr>
             </thead>
             <tbody>
