@@ -89,12 +89,16 @@ const App = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                {output
-                  .split("\n")[0]
-                  .split(",")
-                  .map((header) => (
-                    <th>{header}</th>
-                  ))}
+                <th>#</th>
+                <td>Created At</td>
+                <td>Worker</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+                <td>Total Hours</td>
+                <td>Overtime</td>
+                <td>Pay Rate</td>
+                <td>Memo</td>
+                <td>Adjustment</td>
               </tr>
             </thead>
             <tbody>
@@ -132,7 +136,7 @@ const App = () => {
                           <td>{ot}</td>
                           <td>${rate}</td>
                           <td>
-                            {hol}
+                            {hol} HOL
                             <div className="float-right">
                               <CopyButton text={hol + " HOL"} />
                             </div>
