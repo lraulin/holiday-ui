@@ -109,7 +109,9 @@ function App() {
                   <td>
                     {cell}
                     {"  "}
-                    <CopyButton text={cell} />
+                    <div className="float-right">
+                      <CopyButton text={cell} />
+                    </div>
                   </td>
                 ))}
               </tr>
