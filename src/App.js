@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 // import DatePicker from "react-datepicker";
+import CopyButton from "./CopyButton";
 import "react-datepicker/dist/react-datepicker.css";
 
 // const URL = "http://127.0.0.1:5000/holiday";
@@ -105,7 +106,11 @@ function App() {
             .map((line) => (
               <tr>
                 {line.split(",").map((cell) => (
-                  <td>{cell}</td>
+                  <td>
+                    {cell}
+                    {"  "}
+                    <CopyButton text={cell} />
+                  </td>
                 ))}
               </tr>
             ))}
