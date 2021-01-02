@@ -14,7 +14,6 @@ const CopyButton = ({ text }) => {
   return (
     <>
       <Button
-        class="float-right"
         variant="outline-secondary"
         size="sm"
         onClick={() => updateClipboard(text)}

@@ -9,7 +9,39 @@ import "react-datepicker/dist/react-datepicker.css";
 // const URL = "http://127.0.0.1:5000/holiday";
 const URL = "https://lraulin.pythonanywhere.com/holiday";
 
-async function postData(url = "", data = {}) {
+const Instructions = () => (
+  <>
+    {" "}
+    <h3>Instructions (If using Windows):</h3>
+    <ul>
+      <li>Export Timecards from Booker.</li>
+      <li>Open downloaded file with Notepad; select all and copy.</li>
+      <li>Paste into textbox above and click button.</li>
+    </ul>
+    <h4>Optional (If you want to view it in Excel)</h4>
+    <ul>
+      <li>
+        Right click {">"} Inspect or Ctrl+Shift+I (if in Chrome) to open
+        DevTools.
+      </li>
+      <li>
+        Click on "Console" tab and scroll to bottom to find text after the line
+        that says "POSTING...".
+      </li>
+      <li>
+        Copy all that text. You might have to click "show more" on the bottom
+        right to see it all. You should be able to click on "Copy" on the bottom
+        right; selecting the text should work fine too.{" "}
+      </li>
+      <li>
+        Paste into Notepad and save as *.csv file. Now you should be able to
+        open it in Excel!
+      </li>
+    </ul>
+  </>
+);
+
+const postData = async (url = "", data = {}) => {
   // Default options are marked with *
   const response = await fetch(url, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -17,15 +49,14 @@ async function postData(url = "", data = {}) {
     // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
     // credentials: "same-origin", // include, *same-origin, omit
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    // redirect: "follow", // manual, *follow, error
-    // referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
   return response.json(); // parses JSON response into native JavaScript objects
-}
+};
 
 function App() {
   // const [date, setDate] = useState(new Date(2021, 1, 1));
@@ -33,22 +64,36 @@ function App() {
   const [csv, setCsv] = useState("");
   const [output, setOutput] = useState("");
 
-  const handleSubmit = () => {
+  const handleClickPaste = async () => {
+    const text = await navigator.clipboard.readText();
+    setCsv(text);
+    const data = await postData(URL, { date, csv: text });
+    setOutput(data);
+    // console.log(data);
+  };
+
+  const handleSubmit = async () => {
     console.log("POSTING...");
     // const formattedDate = date.toISOString().slice(0, 10);
-    postData(URL, { date, csv }).then((data) => {
-      setOutput(data);
-      console.log(data); // JSON data parsed by `data.json()` call
-    });
+    console.log(csv);
+    const data = await postData(URL, { date, csv });
+    setOutput(data);
+    // console.log(data);
   };
 
   return (
     <div className="App">
+      <Button variant="primary" onClick={handleClickPaste}>
+        Click Me! (After copying Booker exported CSV text.)
+      </Button>
       <Form>
         <Form.Group controlId="exampleForm.ControlTextarea1">
           {/* <DatePicker selected={date} onChange={(date) => setDate(date)} /> */}
           <Form.Label>
-            <em>Paste Booker export here:</em>
+            <em>
+              Or if that doesn't work... Paste Booker export here and click
+              Submit:
+            </em>
           </Form.Label>
           <Form.Control
             as="textarea"
@@ -57,36 +102,11 @@ function App() {
             onChange={(e) => setCsv(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button variant="secondary" onClick={handleSubmit}>
           Submit
         </Button>
       </Form>
-      <h3>Instructions (If using Windows):</h3>
-      <ul>
-        <li>Export Timecards from Booker.</li>
-        <li>Open downloaded file with Notepad; select all and copy.</li>
-        <li>Paste into textbox above and click button.</li>
-      </ul>
-      <h4>Optional (If you want to view it in Excel)</h4>
-      <ul>
-        <li>
-          Right click {">"} Inspect or Ctrl+Shift+I (if in Chrome) to open
-          DevTools.
-        </li>
-        <li>
-          Click on "Console" tab and scroll to bottom to find text after the
-          line that says "POSTING...".
-        </li>
-        <li>
-          Copy all that text. You might have to click "show more" on the bottom
-          right to see it all. You should be able to click on "Copy" on the
-          bottom right; selecting the text should work fine too.{" "}
-        </li>
-        <li>
-          Paste into Notepad and save as *.csv file. Now you should be able to
-          open it in Excel!
-        </li>
-      </ul>
+      {csv ? null : <Instructions />}
       <h3>Table</h3>
       <Table striped bordered hover>
         <thead>
