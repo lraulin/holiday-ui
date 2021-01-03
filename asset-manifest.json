@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/holiday-ui/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/holiday-ui/static/js/main.d7066e7b.chunk.js",
-    "main.js.map": "/holiday-ui/static/js/main.d7066e7b.chunk.js.map",
+    "main.js": "/holiday-ui/static/js/main.6d37319b.chunk.js",
+    "main.js.map": "/holiday-ui/static/js/main.6d37319b.chunk.js.map",
     "runtime-main.js": "/holiday-ui/static/js/runtime-main.22705131.js",
     "runtime-main.js.map": "/holiday-ui/static/js/runtime-main.22705131.js.map",
     "static/css/2.046848f9.chunk.css": "/holiday-ui/static/css/2.046848f9.chunk.css",
-    "static/js/2.cc2da5b2.chunk.js": "/holiday-ui/static/js/2.cc2da5b2.chunk.js",
-    "static/js/2.cc2da5b2.chunk.js.map": "/holiday-ui/static/js/2.cc2da5b2.chunk.js.map",
+    "static/js/2.07012c4e.chunk.js": "/holiday-ui/static/js/2.07012c4e.chunk.js",
+    "static/js/2.07012c4e.chunk.js.map": "/holiday-ui/static/js/2.07012c4e.chunk.js.map",
     "static/js/3.e8bd0c26.chunk.js": "/holiday-ui/static/js/3.e8bd0c26.chunk.js",
     "static/js/3.e8bd0c26.chunk.js.map": "/holiday-ui/static/js/3.e8bd0c26.chunk.js.map",
     "index.html": "/holiday-ui/index.html",
     "static/css/2.046848f9.chunk.css.map": "/holiday-ui/static/css/2.046848f9.chunk.css.map",
     "static/css/main.6dea0f05.chunk.css.map": "/holiday-ui/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.cc2da5b2.chunk.js.LICENSE.txt": "/holiday-ui/static/js/2.cc2da5b2.chunk.js.LICENSE.txt"
+    "static/js/2.07012c4e.chunk.js.LICENSE.txt": "/holiday-ui/static/js/2.07012c4e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.22705131.js",
     "static/css/2.046848f9.chunk.css",
-    "static/js/2.cc2da5b2.chunk.js",
+    "static/js/2.07012c4e.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.d7066e7b.chunk.js"
+    "static/js/main.6d37319b.chunk.js"
   ]
 }
