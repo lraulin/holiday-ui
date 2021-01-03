@@ -67,10 +67,12 @@ const App = () => {
         csv: reader.result,
       });
       setOutput(csv);
-      const names = super_admin_list.join(", ");
-      setApprovalNeeded(names);
       localStorage.setItem("output", csv);
-      localStorage.setItem("super_admin_list", names);
+      if (super_admin_list) {
+        const names = super_admin_list.sort().join(", ");
+        setApprovalNeeded(names);
+        localStorage.setItem("super_admin_list", names);
+      }
     };
 
     reader.onerror = () => {
