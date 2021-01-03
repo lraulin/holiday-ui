@@ -191,7 +191,11 @@ const App = () => {
                               />
                             </div>
                           </td>
-                          <td>${total}</td>
+                          {Number.parseFloat(total) >= 2000 ? (
+                            <td style={{ color: "red" }}>${total}</td>
+                          ) : (
+                            <td>${total}</td>
+                          )}
                         </>
                       );
                     })()}
