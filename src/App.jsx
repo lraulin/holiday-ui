@@ -8,8 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const { createObjectURL, revokeObjectURL } = global.URL;
 
-// const URL = "http://127.0.0.1:5000/holiday";
-const API_URL = "https://lraulin.pythonanywhere.com/holiday";
+const API_URL = "http://127.0.0.1:5000/holiday";
+// const API_URL = "https://lraulin.pythonanywhere.com/holiday";
 
 const postData = async (url = "", data = {}) => {
   // Default options are marked with *
@@ -42,6 +42,7 @@ const downloadToFile = (content, filename, contentType) => {
 const App = () => {
   const date = "2021-01-01";
   const [output, setOutput] = useState("");
+  const [approvalNeeded, setApprovalNeeded] = useState("");
 
   const handleClickDownload = () => {
     const filename =
@@ -53,14 +54,23 @@ const App = () => {
     const fileObj = event.target.files[0]; // We've not allowed multiple files.
     const reader = new FileReader();
 
-    reader.readAsText(fileObj); // read the filek
+    try {
+      reader.readAsText(fileObj); // read the filek
+    } catch (e) {
+      console.log(e);
+    }
 
     reader.onload = async () => {
       console.log("POSTING...");
-      const data = await postData(API_URL, { date, csv: reader.result });
-      setOutput(data);
-      localStorage.setItem("output", data);
-      console.log(data);
+      const { csv, super_admin_list } = await postData(API_URL, {
+        date,
+        csv: reader.result,
+      });
+      setOutput(csv);
+      const names = super_admin_list.join(", ");
+      setApprovalNeeded(names);
+      localStorage.setItem("output", csv);
+      localStorage.setItem("super_admin_list", names);
     };
 
     reader.onerror = () => {
@@ -70,12 +80,18 @@ const App = () => {
 
   const clearData = () => {
     setOutput("");
+    setApprovalNeeded([]);
     localStorage.removeItem("output");
+    localStorage.removeItem("super_admin_list");
   };
 
   useEffect(() => {
     const data = localStorage.getItem("output");
-    if (data) setOutput(data);
+    const super_admin_list = localStorage.getItem("super_admin_list");
+    if (data) {
+      setOutput(data);
+      setApprovalNeeded(super_admin_list);
+    }
   }, []);
 
   return (
@@ -91,6 +107,13 @@ const App = () => {
           />
         </Form.Group>
       </Form>
+      {approvalNeeded && approvalNeeded.length ? (
+        <>
+          <h3>Admin Approval Needed For:</h3>
+          {approvalNeeded}
+        </>
+      ) : null}
+
       {output ? (
         <div id="outputDisplay">
           <div className="float-right">
@@ -114,6 +137,7 @@ const App = () => {
                 <th>Pay Rate</th>
                 <th>Memo</th>
                 <th>Adjustment</th>
+                <th>Total</th>
               </tr>
             </thead>
             <tbody>
@@ -134,6 +158,7 @@ const App = () => {
                         rate,
                         hol,
                         pay,
+                        total,
                       ] = line.split(",");
                       return (
                         <>
@@ -164,6 +189,7 @@ const App = () => {
                               />
                             </div>
                           </td>
+                          <td>${total}</td>
                         </>
                       );
                     })()}

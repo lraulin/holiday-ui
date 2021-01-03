@@ -25,5 +25,3 @@ const CopyButton = ({ text }) => {
 };
 
 export default CopyButton;
-
-(() => {})();
