@@ -8,8 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const { createObjectURL, revokeObjectURL } = global.URL;
 
-const API_URL = "http://127.0.0.1:5000/holiday";
-// const API_URL = "https://lraulin.pythonanywhere.com/holiday";
+// const API_URL = "http://127.0.0.1:5000/holiday";
+const API_URL = "https://lraulin.pythonanywhere.com/holiday";
 
 const postData = async (url = "", data = {}) => {
   // Default options are marked with *
