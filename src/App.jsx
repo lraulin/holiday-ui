@@ -5,38 +5,17 @@ import Table from "react-bootstrap/Table";
 // import DatePicker from "react-datepicker";
 import CopyButton from "./CopyButton";
 import "react-datepicker/dist/react-datepicker.css";
-
-const { createObjectURL, revokeObjectURL } = global.URL;
-
-// const API_URL = "http://127.0.0.1:5000/holiday";
-const API_URL = "https://lraulin.pythonanywhere.com/holiday";
-
-const postData = async (url = "", data = {}) => {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    // mode: "cors", // no-cors, *cors, same-origin
-    // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    // credentials: "same-origin", // include, *same-origin, omit
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
-};
+import { updateClipboard, postData } from "./lib";
 
 const downloadToFile = (content, filename, contentType) => {
   const a = document.createElement("a");
   const file = new Blob([content], { type: contentType });
 
-  a.href = createObjectURL(file);
+  a.href = URL.createObjectURL(file);
   a.download = filename;
   a.click();
 
-  revokeObjectURL(a.href);
+  URL.revokeObjectURL(a.href);
 };
 
 const App = () => {
@@ -62,10 +41,13 @@ const App = () => {
 
     reader.onload = async () => {
       console.log("POSTING...");
-      const { csv, super_admin_list } = await postData(API_URL, {
-        date,
-        csv: reader.result,
-      });
+      const { csv, super_admin_list } = await postData(
+        process.env.REACT_APP_API_URL,
+        {
+          date,
+          csv: reader.result,
+        }
+      );
       setOutput(csv);
       localStorage.setItem("output", csv);
       if (super_admin_list) {
@@ -82,7 +64,7 @@ const App = () => {
 
   const clearData = () => {
     setOutput("");
-    setApprovalNeeded([]);
+    setApprovalNeeded("");
     localStorage.removeItem("output");
     localStorage.removeItem("super_admin_list");
   };
@@ -112,7 +94,9 @@ const App = () => {
       {approvalNeeded && approvalNeeded.length ? (
         <>
           <h3>Admin Approval Needed For:</h3>
-          {approvalNeeded}
+          {approvalNeeded.split(", ").map((name) => (
+            <span onClick={() => updateClipboard(name)}>{name},</span>
+          ))}
         </>
       ) : null}
 
