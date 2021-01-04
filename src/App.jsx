@@ -41,13 +41,11 @@ const App = () => {
 
     reader.onload = async () => {
       console.log("POSTING...");
-      const { csv, super_admin_list } = await postData(
-        process.env.REACT_APP_API_URL,
-        {
-          date,
-          csv: reader.result,
-        }
-      );
+      const url = "https://lraulin.pythonanywhere.com/holiday";
+      const { csv, super_admin_list } = await postData(url, {
+        date,
+        csv: reader.result,
+      });
       setOutput(csv);
       localStorage.setItem("output", csv);
       if (super_admin_list) {
