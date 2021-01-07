@@ -79,13 +79,12 @@ const App = () => {
 
   return (
     <div className="App">
-      Follow <BookerUrl displayText="this link" /> and click "Export CSV". Then
-      click the button below to select the downloaded file.
+      Follow <BookerUrl displayText="this link" /> and click "Export CSV".
       <Form>
         <Form.Group>
           <Form.File
             id="fileChooser"
-            label="Choose a file created by clicking 'Export CSV' in Booker Timecards with 'Type: HOURLY' and 'Status: preapproved' filters set."
+            label="Select the downloaded text file in your Downloads folder."
             multiple={false}
             accept=".csv,.txt,text/csv,text/plain"
             onChange={(event) => uploadFile(event)}
