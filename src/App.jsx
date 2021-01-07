@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
+import { useState, useEffect } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 // import DatePicker from "react-datepicker";
-import CopyButton from "./CopyButton";
-import "react-datepicker/dist/react-datepicker.css";
-import { updateClipboard, postData } from "./lib";
+import CopyButton from './CopyButton';
+import 'react-datepicker/dist/react-datepicker.css';
+import { updateClipboard, postData } from './lib';
+import BookerUrl from './BookerUrl';
 
 const downloadToFile = (content, filename, contentType) => {
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   const file = new Blob([content], { type: contentType });
 
   a.href = URL.createObjectURL(file);
@@ -19,14 +20,14 @@ const downloadToFile = (content, filename, contentType) => {
 };
 
 const App = () => {
-  const date = "2021-01-01";
-  const [output, setOutput] = useState("");
-  const [approvalNeeded, setApprovalNeeded] = useState("");
+  const date = '2021-01-01';
+  const [output, setOutput] = useState('');
+  const [approvalNeeded, setApprovalNeeded] = useState('');
 
   const handleClickDownload = () => {
     const filename =
-      "Holiday Pay Adjustments" + new Date().toISOString() + ".csv";
-    downloadToFile(output, filename, "text/csv");
+      'Holiday Pay Adjustments' + new Date().toISOString() + '.csv';
+    downloadToFile(output, filename, 'text/csv');
   };
 
   const uploadFile = (event) => {
@@ -40,18 +41,18 @@ const App = () => {
     }
 
     reader.onload = async () => {
-      console.log("POSTING...");
-      const url = "https://lraulin.pythonanywhere.com/holiday";
+      console.log('POSTING...');
+      const url = 'https://lraulin.pythonanywhere.com/holiday';
       const { csv, super_admin_list } = await postData(url, {
         date,
         csv: reader.result,
       });
       setOutput(csv);
-      localStorage.setItem("output", csv);
+      localStorage.setItem('output', csv);
       if (super_admin_list) {
-        const names = super_admin_list.sort().join(", ");
+        const names = super_admin_list.sort().join(', ');
         setApprovalNeeded(names);
-        localStorage.setItem("super_admin_list", names);
+        localStorage.setItem('super_admin_list', names);
       }
     };
 
@@ -61,15 +62,15 @@ const App = () => {
   };
 
   const clearData = () => {
-    setOutput("");
-    setApprovalNeeded("");
-    localStorage.removeItem("output");
-    localStorage.removeItem("super_admin_list");
+    setOutput('');
+    setApprovalNeeded('');
+    localStorage.removeItem('output');
+    localStorage.removeItem('super_admin_list');
   };
 
   useEffect(() => {
-    const data = localStorage.getItem("output");
-    const super_admin_list = localStorage.getItem("super_admin_list");
+    const data = localStorage.getItem('output');
+    const super_admin_list = localStorage.getItem('super_admin_list');
     if (data) {
       setOutput(data);
       setApprovalNeeded(super_admin_list);
@@ -78,6 +79,8 @@ const App = () => {
 
   return (
     <div className="App">
+      Follow <BookerUrl displayText="this link" /> and click "Export CSV". Then
+      click the button below to select the downloaded file.
       <Form>
         <Form.Group>
           <Form.File
@@ -92,12 +95,11 @@ const App = () => {
       {approvalNeeded && approvalNeeded.length ? (
         <>
           <h3>Admin Approval Needed For:</h3>
-          {approvalNeeded.split(", ").map((name) => (
+          {approvalNeeded.split(', ').map((name) => (
             <span onClick={() => updateClipboard(name)}>{name},</span>
           ))}
         </>
       ) : null}
-
       {output ? (
         <div id="outputDisplay">
           <div className="float-right">
@@ -126,7 +128,7 @@ const App = () => {
             </thead>
             <tbody>
               {output
-                .split("\n")
+                .split('\n')
                 .slice(1)
                 .map((line) => (
                   <tr>
@@ -143,7 +145,7 @@ const App = () => {
                         hol,
                         pay,
                         total,
-                      ] = line.split(",");
+                      ] = line.split(',');
                       return (
                         <>
                           <td>{num}</td>
@@ -162,7 +164,7 @@ const App = () => {
                           <td>
                             {hol} HOL
                             <div className="float-right">
-                              <CopyButton text={hol + " HOL"} />
+                              <CopyButton text={hol + ' HOL'} />
                             </div>
                           </td>
                           <td>
@@ -174,7 +176,7 @@ const App = () => {
                             </div>
                           </td>
                           {Number.parseFloat(total) >= 2000 ? (
-                            <td style={{ color: "red" }}>${total}</td>
+                            <td style={{ color: 'red' }}>${total}</td>
                           ) : (
                             <td>${total}</td>
                           )}
