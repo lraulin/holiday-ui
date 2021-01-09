@@ -129,23 +129,25 @@ const App = () => {
               {output
                 .split('\n')
                 .slice(1)
-                .map((line) => (
-                  <tr>
-                    {(() => {
-                      const [
-                        num,
-                        created,
-                        name,
-                        start,
-                        end,
-                        hrs,
-                        ot,
-                        rate,
-                        hol,
-                        pay,
-                        total,
-                      ] = line.split(',');
-                      return (
+                .map((line) => {
+                  const [
+                    num,
+                    created,
+                    name,
+                    start,
+                    end,
+                    hrs,
+                    ot,
+                    rate,
+                    hol,
+                    pay,
+                    total,
+                  ] = line.split(',');
+                  const style =
+                    Number.parseFloat(total) >= 2000 ? { color: 'red' } : {};
+                  return (
+                    <tr style={style}>
+                      {(() => (
                         <>
                           <td>{num}</td>
                           <td>{created}</td>
@@ -174,16 +176,12 @@ const App = () => {
                               />
                             </div>
                           </td>
-                          {Number.parseFloat(total) >= 2000 ? (
-                            <td style={{ color: 'red' }}>${total}</td>
-                          ) : (
-                            <td>${total}</td>
-                          )}
+                          <td>${total}</td>
                         </>
-                      );
-                    })()}
-                  </tr>
-                ))}
+                      ))()}
+                    </tr>
+                  );
+                })}
             </tbody>
           </Table>
         </div>
