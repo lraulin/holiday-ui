@@ -22,7 +22,7 @@ const downloadToFile = (content, filename, contentType) => {
 const App = () => {
   const date = '2021-01-01';
   const [output, setOutput] = useState('');
-  const [approvalNeeded, setApprovalNeeded] = useState('');
+  const [approvalNeeded, setApprovalNeeded] = useState([]);
 
   const handleClickDownload = () => {
     const filename =
@@ -49,10 +49,12 @@ const App = () => {
       });
       setOutput(csv);
       localStorage.setItem('output', csv);
-      if (super_admin_list) {
-        const names = super_admin_list.sort().join(', ');
-        setApprovalNeeded(names);
-        localStorage.setItem('super_admin_list', names);
+      if (super_admin_list.length) {
+        setApprovalNeeded(super_admin_list);
+        localStorage.setItem(
+          'super_admin_list',
+          JSON.stringify(super_admin_list),
+        );
       }
     };
 
@@ -70,9 +72,13 @@ const App = () => {
 
   useEffect(() => {
     const data = localStorage.getItem('output');
-    const super_admin_list = localStorage.getItem('super_admin_list');
+    const super_admin_list = JSON.parse(
+      localStorage.getItem('super_admin_list'),
+    );
     if (data) {
       setOutput(data);
+    }
+    if (super_admin_list) {
       setApprovalNeeded(super_admin_list);
     }
   }, []);
@@ -91,10 +97,10 @@ const App = () => {
           />
         </Form.Group>
       </Form>
-      {approvalNeeded && approvalNeeded.length ? (
+      {approvalNeeded.length ? (
         <>
-          <h3>Admin Approval Needed For:</h3>
-          {approvalNeeded.split(', ').map((name) => (
+          <h3>Admin Approval Needed For ({approvalNeeded.length}):</h3>
+          {approvalNeeded.map((name) => (
             <span onClick={() => updateClipboard(name)}>{name},</span>
           ))}
         </>
