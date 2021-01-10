@@ -72,14 +72,18 @@ const App = () => {
 
   useEffect(() => {
     const data = localStorage.getItem('output');
-    const super_admin_list = JSON.parse(
-      localStorage.getItem('super_admin_list'),
-    );
-    if (data) {
-      setOutput(data);
-    }
-    if (super_admin_list) {
-      setApprovalNeeded(super_admin_list);
+    try {
+      const super_admin_list = JSON.parse(
+        localStorage.getItem('super_admin_list'),
+      );
+      if (data) {
+        setOutput(data);
+      }
+      if (super_admin_list && super_admin_list.length) {
+        setApprovalNeeded(super_admin_list);
+      }
+    } catch (e) {
+      console.log(e);
     }
   }, []);
 
