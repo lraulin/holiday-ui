@@ -111,6 +111,7 @@ const App = () => {
       ) : null}
       {output ? (
         <div id="outputDisplay">
+          <h3>{output.split('\n').length - 3} Total Timecards</h3>
           <div className="float-right">
             <Button variant="danger" onClick={clearData}>
               Reset
