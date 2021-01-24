@@ -43,10 +43,12 @@ const App = () => {
     reader.onload = async () => {
       console.log('POSTING...');
       const url = 'https://lraulin.pythonanywhere.com/holiday';
-      const { csv, super_admin_list } = await postData(url, {
+      const reqBody = {
         date,
         csv: reader.result,
-      });
+      };
+      console.log(JSON.stringify(reqBody));
+      const { csv, super_admin_list } = await postData(url, reqBody);
       setOutput(csv);
       localStorage.setItem('output', csv);
       if (super_admin_list.length) {
@@ -87,6 +89,11 @@ const App = () => {
     }
   }, []);
 
+  const handleNameClick = (name) => {
+    updateClipboard(name);
+    setApprovalNeeded(approvalNeeded.filter((n) => n !== name));
+  };
+
   return (
     <div className="App">
       Follow <BookerUrl displayText="this link" /> and click "Export CSV".
@@ -105,13 +112,16 @@ const App = () => {
         <>
           <h3>Admin Approval Needed For ({approvalNeeded.length}):</h3>
           {approvalNeeded.map((name) => (
-            <span onClick={() => updateClipboard(name)}>{name},</span>
+            <span onClick={() => handleNameClick(name)}>{name},</span>
           ))}
         </>
       ) : null}
       {output ? (
         <div id="outputDisplay">
-          <h3>{output.split('\n').length - 3} Total Timecards</h3>
+          <div>
+            <em>{output.split('\n').length - 3} Total Timecards</em>
+          </div>
+
           <div className="float-right">
             <Button variant="danger" onClick={clearData}>
               Reset
